@@ -42,13 +42,19 @@ Generate structured study notes in the following JSON format (respond with ONLY 
   "definitions": [{"term": "term1", "definition": "definition1"}, {"term": "term2", "definition": "definition2"}],
   "keyPoints": ["key point 1", "key point 2", "key point 3", "key point 4", "key point 5"],
   "examQuestions": ["question 1?", "question 2?", "question 3?", "question 4?"],
-  "mermaidDiagram": "graph TD\\n  A[Start] --> B[Step 1]\\n  B --> C[Step 2]",
+  "mermaidDiagram": "graph TD\\n  A[\"Start\"] --> B[\"Step 1\"]\\n  B --> C[\"Step 2\"]",
   "comparisonTable": {
     "headers": ["Aspect", "Option A", "Option B"],
     "rows": [["Row 1", "Val A", "Val B"]]
   },
   "formulas": ["formula or important rule 1", "formula or important rule 2"]
-}`
+}
+
+STRICT RULE FOR mermaidDiagram:
+1. Every node label MUST be in double quotes, e.g., A["Label"].
+2. Avoid using parentheses ( ) or brackets [ ] inside valid labels unless they are inside double quotes.
+3. Keep the diagram simple and easy to read.
+4. Use ONLY 'graph TD' (top-down) for consistency.`
 
         let result
         try {
