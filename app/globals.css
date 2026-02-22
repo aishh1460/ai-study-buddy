@@ -1,0 +1,323 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap');
+
+/* ── CSS Variables / Mood Themes ── */
+:root {
+  --mood-bg-from: #fce7f3;
+  --mood-bg-to: #fbcfe8;
+  --mood-accent: #ec4899;
+  --mood-glow: rgba(236, 72, 153, 0.3);
+  --mood-brightness: 1;
+  --mood-msg: "You've got this! 💪";
+}
+
+body.mood-calm {
+  --mood-bg-from: #fce7f3;
+  --mood-bg-to: #e0e7ff;
+  --mood-accent: #818cf8;
+  --mood-glow: rgba(129, 140, 248, 0.3);
+  --mood-brightness: 1;
+}
+
+body.mood-motivated {
+  --mood-bg-from: #fce7f3;
+  --mood-bg-to: #fed7aa;
+  --mood-accent: #f97316;
+  --mood-glow: rgba(249, 115, 22, 0.3);
+  --mood-brightness: 1.05;
+}
+
+body.mood-tired {
+  --mood-bg-from: #e0e7ff;
+  --mood-bg-to: #ddd6fe;
+  --mood-accent: #8b5cf6;
+  --mood-glow: rgba(139, 92, 246, 0.25);
+  --mood-brightness: 0.9;
+}
+
+body.mood-stressed {
+  --mood-bg-from: #fce7f3;
+  --mood-bg-to: #d1fae5;
+  --mood-accent: #10b981;
+  --mood-glow: rgba(16, 185, 129, 0.3);
+  --mood-brightness: 0.95;
+}
+
+/* ── Base Styles ── */
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--mood-bg-from) 0%, var(--mood-bg-to) 100%);
+  min-height: 100vh;
+  filter: brightness(var(--mood-brightness));
+  transition: filter 0.8s ease, background 0.8s ease;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Stars Animation ── */
+.stars-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(236, 72, 153, 0.5);
+  animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  50% { opacity: 0.2; transform: translateY(-30px) scale(1.2); }
+  100% { transform: translateY(-60px) scale(0.8); opacity: 0; }
+}
+
+/* ── Glassmorphism Cards ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.1), 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 12px 40px var(--mood-glow), 0 4px 16px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+.glass-card-dark {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+}
+
+/* ── Glow Buttons ── */
+.btn-glow {
+  background: linear-gradient(135deg, var(--mood-accent), #f9a8d4);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--mood-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--mood-glow);
+}
+
+.btn-glow:active {
+  transform: translateY(0px);
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.6);
+  border: 1.5px solid var(--mood-accent);
+  color: var(--mood-accent);
+  border-radius: 50px;
+  padding: 10px 22px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-ghost:hover {
+  background: var(--mood-accent);
+  color: white;
+  box-shadow: 0 4px 15px var(--mood-glow);
+}
+
+/* ── Section Headings ── */
+.section-header {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--mood-accent), #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Study Content Sections ── */
+.study-section {
+  border-left: 3px solid var(--mood-accent);
+  padding-left: 16px;
+  margin: 16px 0;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Progress Bars ── */
+.progress-bar {
+  height: 10px;
+  border-radius: 20px;
+  background: rgba(236, 72, 153, 0.15);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, var(--mood-accent), #c084fc);
+  transition: width 0.8s ease;
+}
+
+/* ── Chat Bubbles ── */
+.chat-bubble-user {
+  background: linear-gradient(135deg, var(--mood-accent), #f9a8d4);
+  color: white;
+  border-radius: 18px 18px 4px 18px;
+  padding: 10px 16px;
+  max-width: 80%;
+  margin-left: auto;
+}
+
+.chat-bubble-ai {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(236,72,153,0.2);
+  border-radius: 18px 18px 18px 4px;
+  padding: 10px 16px;
+  max-width: 80%;
+}
+
+/* ── Quiz Cards ── */
+.quiz-option {
+  background: rgba(255,255,255,0.7);
+  border: 1.5px solid rgba(236,72,153,0.2);
+  border-radius: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 4px 0;
+}
+
+.quiz-option:hover {
+  border-color: var(--mood-accent);
+  background: rgba(236,72,153,0.08);
+}
+
+.quiz-option.correct {
+  border-color: #10b981;
+  background: rgba(16,185,129,0.1);
+  color: #065f46;
+}
+
+.quiz-option.wrong {
+  border-color: #ef4444;
+  background: rgba(239,68,68,0.1);
+  color: #7f1d1d;
+}
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.7);
+  border: 1.5px solid var(--mood-accent);
+  color: var(--mood-accent);
+}
+
+.badge.earned {
+  background: linear-gradient(135deg, var(--mood-accent), #c084fc);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 3px 10px var(--mood-glow);
+}
+
+/* ── Timer Ring ── */
+.timer-ring {
+  transform: rotate(-90deg);
+}
+
+/* ── Mermaid Diagrams ── */
+.mermaid-wrap svg {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* ── Comparison Table ── */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.comp-table th {
+  background: linear-gradient(135deg, var(--mood-accent), #c084fc);
+  color: white;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.comp-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(236,72,153,0.1);
+  font-size: 0.9rem;
+}
+
+.comp-table tr:nth-child(even) {
+  background: rgba(236,72,153,0.04);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(236,72,153,0.4);
+  border-radius: 10px;
+}
+
+/* ── Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+
+/* ── Mobile fixes ── */
+@media (max-width: 768px) {
+  .glass-card { border-radius: 16px; }
+}
